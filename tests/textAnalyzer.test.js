@@ -48,6 +48,12 @@ describe('Should count words', () => {
         const result = countWords('./data/test-words-whitespace.txt');
         expect(result).toBe(0);
     });
+
+    test('Handles punctuation and special characters', () => {
+        fs.writeFileSync('./data/test-words-punctuation.txt', 'Hello, world! How are you?');
+        const result = countWords('./data/test-words-punctuation.txt');
+        expect(result).toBe(5);
+    });
 });
 
 describe('Should find longest word', () => {
