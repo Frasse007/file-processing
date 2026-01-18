@@ -48,6 +48,12 @@ describe('Should sum numbers', () => {
         const result = sumNumbers('./data/test-sum-empty.txt');
         expect(result).toBe(30);
     });
+
+    test('Handles file with no valid numbers', () => {
+        fs.writeFileSync('./data/test-invalid.txt', 'abc\ndef\nghi');
+        const result = sumNumbers('./data/test-invalid.txt');
+        expect(result).toBe(0);
+    });
 })
 
 describe('Should find high and low', () => {
@@ -85,6 +91,13 @@ describe('Should find high and low', () => {
         fs.writeFileSync('./data/test-high-low-empty.txt', '5\n\n10\n\n15');
         const result = findHighLow('./data/test-high-low-empty.txt');
         expect(result).toEqual({High: 15, Low: 5});
+    });
+
+    
+    test('Handles values of zero', () => {
+        fs.writeFileSync('./data/test-zero.txt', '-5\n0\n5');
+        const result = findHighLow('./data/test-zero.txt')
+        expect(result).toEqual({High: 5, Low: -5});
     });
 })
 
